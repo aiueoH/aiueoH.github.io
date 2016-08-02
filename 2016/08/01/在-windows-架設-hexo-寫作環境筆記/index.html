@@ -121,13 +121,17 @@ deploy:
 <pre><code>INFO  Deploy done: git
 </code></pre><p>並可以在 <code>https://yoyoboy.github.io</code> 瀏覽你的 Blog。</p>
 <h4 id="佈署失敗的錯誤訊息"><a href="#佈署失敗的錯誤訊息" class="headerlink" title="佈署失敗的錯誤訊息"></a><strong>佈署失敗的錯誤訊息</strong></h4><ul>
-<li><p>Please tell me who you are.</p>
-<p>  Git 還沒設定使用者 email 和 name，用下面的指令設定一下。</p>
+<li><p>沒設定 git 使用者</p>
+<pre><code>Please tell me who you are.
+</code></pre><p>  用下面的指令設定一下。</p>
 <pre><code>git config --global user.email &quot;you@example.com&quot;
 git config --global user.name &quot;Your Name&quot;
 </code></pre></li>
-<li><p>ERROR Deployer not found: git</p>
-<p> 出現這個代表有可能沒安裝 <code>hexo-deployer-git</code>，可以在 Blog 目錄下輸入</p>
+</ul>
+<ul>
+<li><p>沒安裝 <code>hexo-deployer-git</code></p>
+<pre><code>ERROR Deployer not found: git
+</code></pre><p> 可以在 Blog 目錄下輸入</p>
 <pre><code>npm install
 </code></pre><p> 或者</p>
 <pre><code>npm install hexo-deployer-git --save
