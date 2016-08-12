@@ -156,6 +156,45 @@ git config --global user.name &quot;Your Name&quot;
 
 
 
+  <article class="post">
+  
+  <div class="post-content">
+    <header>
+      
+        <div class="icon"></div>
+        <time datetime="2016-07-01T02:12:44.000Z"><a href="/2016/07/01/remove-android-unused-resources/">2016-07-01</a></time>
+      
+      
+  
+    <h1 class="title"><a href="/2016/07/01/remove-android-unused-resources/">移除 Android 沒用到的資源</a></h1>
+  
+
+    </header>
+    <div class="entry">
+      
+        <h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a><strong>前言</strong></h2><p>身為一個習慣差的工程師，在專案做久了之後總是會產生一堆垃圾，用不到的 class、variable、function……等等，這些在 refactor 的時候還滿容易就順手清掉，但 Android 的 resource 就不同了，不知道為什麼一段時間過去總是會留下許多灰色名稱的 resource，string、dimen 還不打緊，如果是圖片的話就不太好了，apk 可是愈瘦愈好。(不過也是有人在下載 app 的時候看到檔案愈大會愈覺得有份量、愈好)</p>
+<h2 id="方法"><a href="#方法" class="headerlink" title="方法"></a><strong>方法</strong></h2><p>最快的方法應該是 <code>ctrl + alt + shift + i</code> 然後輸入 <code>unused resource</code> 然後就跑出來了。</p>
+<p><img src="/img/remove_android_unused_resources/1.png" alt=""></p>
+<p>可以選擇要搜尋的範圍。</p>
+<p><img src="/img/remove_android_unused_resources/2.png" alt=""></p>
+<p>搜尋完成後會跳出這個視窗，接著就可以進行移除啦！</p>
+<p><img src="/img/remove_android_unused_resources/3.png" alt=""></p>
+
+      
+    </div>
+    <footer>
+      
+        
+        
+      
+      <div class="clearfix"></div>
+    </footer>
+  </div>
+</article>
+
+
+
+
 
 <nav id="pagination">
   
@@ -165,7 +204,7 @@ git config --global user.name &quot;Your Name&quot;
     <aside id="sidebar" class="alignright">
   <div class="search">
   <form action="//google.com/search" method="get" accept-charset="utf-8">
-    <input type="search" name="q" results="0" placeholder="Search">
+    <input type="search" name="q" results="0" placeholder="Suche">
     <input type="hidden" name="q" value="site:aiueoh.github.io">
   </form>
 </div>
@@ -177,7 +216,7 @@ git config --global user.name &quot;Your Name&quot;
   <h3 class="title">Tags</h3>
   <ul class="entry">
   
-    <li><a href="/tags/android/">android</a><small>0</small></li>
+    <li><a href="/tags/android/">android</a><small>1</small></li>
   
     <li><a href="/tags/eye/">eye</a><small>0</small></li>
   
@@ -189,7 +228,9 @@ git config --global user.name &quot;Your Name&quot;
   
     <li><a href="/tags/java/">java</a><small>0</small></li>
   
-    <li><a href="/tags/markdow/">markdow</a><small>1</small></li>
+    <li><a href="/tags/markdow/">markdow</a><small>0</small></li>
+  
+    <li><a href="/tags/markdown/">markdown</a><small>1</small></li>
   
     <li><a href="/tags/plist/">plist</a><small>0</small></li>
   

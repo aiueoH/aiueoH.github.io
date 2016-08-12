@@ -1,0 +1,204 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>移除 Android 沒用到的資源 | 韋恩居士&#39;s blog</title>
+  <meta name="author" content="Wayne">
+  
+  <meta name="description" content="前言身為一個習慣差的工程師，在專案做久了之後總是會產生一堆垃圾，用不到的 class、variable、function……等等，這些在 refactor 的時候還滿容易就順手清掉，但 Android 的 resource 就不同了，不知道為什麼一段時間過去總是會留下許多灰色名稱的 resource">
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+  <meta property="og:title" content="移除 Android 沒用到的資源"/>
+  <meta property="og:site_name" content="韋恩居士&#39;s blog"/>
+
+  
+    <meta property="og:image" content="undefined"/>
+  
+
+  <link href="/favicon.png" rel="icon">
+  <link rel="alternate" href="/atom.xml" title="韋恩居士&#39;s blog" type="application/atom+xml">
+  <link rel="stylesheet" href="/css/style.css" media="screen" type="text/css">
+  <!--[if lt IE 9]><script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
+  
+
+</head>
+
+
+<body>
+  <header id="header" class="inner"><div class="alignleft">
+  <h1><a href="/">韋恩居士&#39;s blog</a></h1>
+  <h2><a href="/"></a></h2>
+</div>
+<nav id="main-nav" class="alignright">
+  <ul>
+    
+      <li><a href="/">Home</a></li>
+    
+      <li><a href="/archives">Archives</a></li>
+    
+  </ul>
+  <div class="clearfix"></div>
+</nav>
+<div class="clearfix"></div>
+</header>
+  <div id="content" class="inner">
+    <div id="main-col" class="alignleft"><div id="wrapper"><article class="post">
+  
+  <div class="post-content">
+    <header>
+      
+        <div class="icon"></div>
+        <time datetime="2016-07-01T02:12:44.000Z"><a href="/2016/07/01/remove-android-unused-resources/">2016-07-01</a></time>
+      
+      
+  
+    <h1 class="title">移除 Android 沒用到的資源</h1>
+  
+
+    </header>
+    <div class="entry">
+      
+        <h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a><strong>前言</strong></h2><p>身為一個習慣差的工程師，在專案做久了之後總是會產生一堆垃圾，用不到的 class、variable、function……等等，這些在 refactor 的時候還滿容易就順手清掉，但 Android 的 resource 就不同了，不知道為什麼一段時間過去總是會留下許多灰色名稱的 resource，string、dimen 還不打緊，如果是圖片的話就不太好了，apk 可是愈瘦愈好。(不過也是有人在下載 app 的時候看到檔案愈大會愈覺得有份量、愈好)</p>
+<h2 id="方法"><a href="#方法" class="headerlink" title="方法"></a><strong>方法</strong></h2><p>最快的方法應該是 <code>ctrl + alt + shift + i</code> 然後輸入 <code>unused resource</code> 然後就跑出來了。</p>
+<p><img src="/img/remove_android_unused_resources/1.png" alt=""></p>
+<p>可以選擇要搜尋的範圍。</p>
+<p><img src="/img/remove_android_unused_resources/2.png" alt=""></p>
+<p>搜尋完成後會跳出這個視窗，接著就可以進行移除啦！</p>
+<p><img src="/img/remove_android_unused_resources/3.png" alt=""></p>
+
+      
+    </div>
+    <footer>
+      
+        
+        
+  
+  <div class="tags">
+    <a href="/tags/android/">android</a>
+  </div>
+
+        
+  <div class="addthis addthis_toolbox addthis_default_style">
+    
+      <a class="addthis_button_facebook_like" fb:like:layout="button_count"></a>
+    
+    
+      <a class="addthis_button_tweet"></a>
+    
+    
+      <a class="addthis_button_google_plusone" g:plusone:size="medium"></a>
+    
+    
+      <a class="addthis_button_pinterest_pinit" pi:pinit:layout="horizontal"></a>
+    
+    <a class="addthis_counter addthis_pill_style"></a>
+  </div>
+  <script type="text/javascript" src="//s7.addthis.com/js/300/addthis_widget.js"></script>
+
+      
+      <div class="clearfix"></div>
+    </footer>
+  </div>
+</article>
+
+
+<section id="comment">
+  <h1 class="title">Kommentare</h1>
+
+  
+      <div id="fb-root"></div>
+<script>
+  (function(d, s, id) {
+    var js, fjs = d.getElementsByTagName(s)[0];
+    if (d.getElementById(id)) return;
+    js = d.createElement(s); js.id = id;
+    js.src = "//connect.facebook.net/en_US/all.js#xfbml=1&appId=123456789012345";
+    fjs.parentNode.insertBefore(js, fjs);
+  }(document, 'script', 'facebook-jssdk'));
+</script>
+
+<div class="fb-comments" data-href="https://aiueoh.github.io/2016/07/01/remove-android-unused-resources/index.html" data-num-posts="5" data-width="840" data-colorscheme="light"></div>
+      
+  
+</section>
+
+</div></div>
+    <aside id="sidebar" class="alignright">
+  <div class="search">
+  <form action="//google.com/search" method="get" accept-charset="utf-8">
+    <input type="search" name="q" results="0" placeholder="Suche">
+    <input type="hidden" name="q" value="site:aiueoh.github.io">
+  </form>
+</div>
+
+  
+
+  
+<div class="widget tag">
+  <h3 class="title">Tags</h3>
+  <ul class="entry">
+  
+    <li><a href="/tags/android/">android</a><small>1</small></li>
+  
+    <li><a href="/tags/eye/">eye</a><small>0</small></li>
+  
+    <li><a href="/tags/hexo/">hexo</a><small>1</small></li>
+  
+    <li><a href="/tags/htc/">htc</a><small>0</small></li>
+  
+    <li><a href="/tags/intellij/">intellij</a><small>0</small></li>
+  
+    <li><a href="/tags/java/">java</a><small>0</small></li>
+  
+    <li><a href="/tags/markdow/">markdow</a><small>0</small></li>
+  
+    <li><a href="/tags/markdown/">markdown</a><small>1</small></li>
+  
+    <li><a href="/tags/plist/">plist</a><small>0</small></li>
+  
+    <li><a href="/tags/root/">root</a><small>0</small></li>
+  
+    <li><a href="/tags/windows/">windows</a><small>1</small></li>
+  
+    <li><a href="/tags/xml/">xml</a><small>0</small></li>
+  
+    <li><a href="/tags/xposed/">xposed</a><small>0</small></li>
+  
+    <li><a href="/tags/旅遊/">旅遊</a><small>0</small></li>
+  
+    <li><a href="/tags/曼谷/">曼谷</a><small>0</small></li>
+  
+    <li><a href="/tags/泰國/">泰國</a><small>0</small></li>
+  
+  </ul>
+</div>
+
+</aside>
+    <div class="clearfix"></div>
+  </div>
+  <footer id="footer" class="inner"><div class="alignleft">
+  
+  &copy; 2016 Wayne
+  
+</div>
+<div class="clearfix"></div></footer>
+  <script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+<script src="/js/jquery.imagesloaded.min.js"></script>
+<script src="/js/gallery.js"></script>
+
+
+
+
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css" media="screen" type="text/css">
+<script src="/fancybox/jquery.fancybox.pack.js"></script>
+<script type="text/javascript">
+(function($){
+  $('.fancybox').fancybox();
+})(jQuery);
+</script>
+
+</body>
+</html>
