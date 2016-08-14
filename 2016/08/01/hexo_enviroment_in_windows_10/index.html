@@ -57,7 +57,7 @@ node.js
     <header>
       
         <div class="icon"></div>
-        <time datetime="2016-08-01T03:00:22.000Z"><a href="/2016/08/01/在-windows-架設-hexo-寫作環境筆記/">2016-08-01</a></time>
+        <time datetime="2016-08-01T03:00:22.000Z"><a href="/2016/08/01/hexo_enviroment_in_windows_10/">2016-08-01</a></time>
       
       
   
@@ -75,8 +75,8 @@ node.js
 <li><p><a href="https://nodejs.org/en/" target="_blank" rel="external">node.js</a></p>
 <p>  我用的是 4.4.7LTS。</p>
 </li>
-<li><p><a href="https://git-scm.com/download/win" target="_blank" rel="external">Git for Windows</a></p>
-<p>  要把 Hexo 推上 Github 用的。</p>
+<li><p><a href="http://schinagl.priv.at/nt/hardlinkshellext/linkshellextension.html#contact" target="_blank" rel="external">Link Shell Extension</a></p>
+<p>  讓 Windows 中可以建立 Symbolic link 用的，用來解決 MarkdownPad 圖片連結問題，不安裝這個也可以，但我有裝，詳情請看插入圖片段落。</p>
 </li>
 </ul>
 <h2 id="安裝-Hexo"><a href="#安裝-Hexo" class="headerlink" title="安裝 Hexo"></a><strong>安裝 Hexo</strong></h2><p>安裝好 noode.js 後，在命令提示字元或 git bash 輸入下面兩行，以 npm 安裝 hexo。</p>
@@ -84,11 +84,7 @@ node.js
 npm install hexo --save
 </code></pre><h2 id="建立-Blog"><a href="#建立-Blog" class="headerlink" title="建立 Blog"></a><strong>建立 Blog</strong></h2><p>cd 至想要的目錄後輸入</p>
 <pre><code>hexo init
-</code></pre><p>如此就會產生 Hexo 的整個資料夾</p>
-<p>在建立 Blog 後，進入該目錄輸入 <code>npm install</code> 以安裝相依套件。</p>
-<pre><code>cd blog
-npm install
-</code></pre><p>接著可輸入</p>
+</code></pre><p>如此就會產生 Hexo 的各個檔案，接著可輸入</p>
 <pre><code>hexo s -p 8080
 </code></pre><p>打開瀏覽器進入 localhost:8080 即可看到 Blog 在你眼前，如果看不到就是你眼睛業障重或者某個步驟有問題。</p>
 <h2 id="開始寫文章"><a href="#開始寫文章" class="headerlink" title="開始寫文章"></a><strong>開始寫文章</strong></h2><p>cd 至 Blog 的目錄，輸入</p>
@@ -104,49 +100,20 @@ npm install
 </code></pre><p>其實手動把檔案從 <code>/source/_drafts</code> 移到 <code>/source/_posts</code> 也可以，感覺上好像還比較簡單。</p>
 <h2 id="在文章中插入圖片"><a href="#在文章中插入圖片" class="headerlink" title="在文章中插入圖片"></a><strong>在文章中插入圖片</strong></h2><p>這部分有點麻煩，在 <code>/source</code> 建立一目錄，例如 <code>/source/img</code>，然後把圖片丟進去，假設圖片是 <code>gogog.jpg</code>，在文章中輸入 <code>![](/gogogo.jpg)</code> 就會在 hexo 中正常顯示。</p>
 <p>BUT!!</p>
-<p>這樣的話在 MarkdownPad 中無法顯示，一個簡單的方法就是先把整個圖片資料夾複製到 <code>/source/_posts</code> 中，文章寫好後再刪掉。猜測應該可以透過修改生成 Blog 的 code 來實現更方便的方法。</p>
+<p>這樣的話在 MarkdownPad 中無法顯示，一個簡單的方法就是先把整個圖片資料夾複製到 <code>/source/_posts</code> 中，文章寫好後再刪掉，但就是每次都要複製貼上，相信會想要使用 hexo 的人應該不會想要做。</p>
+<p>高端的方法是，使用 Link Shell Extension 建立 Symbolic Link，有點類似 windows 捷徑的概念但光是用 windows 的捷徑無法達成真正連結的效果。</p>
+<p>安裝好 Link Shell Extension 後在 <code>/source/img</code> 上點右鍵並點選 <code>Pick Link Source</code>。</p>
+<p><img src="/img/hexo-enviroment-in-windows-10/1-pick-link-source.png" alt=""></p>
+<p>接著移動到 <code>/source/_posts</code> 在資料夾中空白的地方點右鍵，接著 Drop As… &gt; Symbolic Link 就可以建立好連結了。</p>
+<p><img src="/img/hexo-enviroment-in-windows-10/2-symbolic-link.png" alt=""></p>
+<p>如此一來這兩個資料夾就是完全相通的東西了。</p>
 <h2 id="更換佈景主題"><a href="#更換佈景主題" class="headerlink" title="更換佈景主題"></a><strong>更換佈景主題</strong></h2><p>將佈景主題放在 <code>/themes</code>，然後在 <code>/config.yml</code> 中將 <code>theme</code> 欄位改成你的佈景主題目錄名稱即可。</p>
 <p>至於佈景主題該去哪下載呢?</p>
 <p><a href="https://hexo.io/themes/" target="_blank" rel="external">Hexo 官方</a>展示了不少主題，找個喜歡的點進去，有些作者會直接附上該主題的 Github 連結，如果沒有的話再自己 Google 該主題名稱通常就可以找到了。</p>
-<h2 id="佈署到-Github"><a href="#佈署到-Github" class="headerlink" title="佈署到 Github"></a><strong>佈署到 Github</strong></h2><p>首先要先有一個 <code>[username].github.io</code> 的 repo，假設 Gtihub 使用者名稱是 <code>yoyoboy</code>，就建立一個 <code>yoyoboy.github.io</code> 的 repo。</p>
-<p>打開 <code>/themes/_config.yml</code> 在 <code>#Deployment</code> 的地方設定佈署的資訊。</p>
-<pre><code>#Deployment
-deploy:
-    type: git
-    repo: https://github.com/yoyoboy/yoyoboy.github.io.git
-    branch: master
-</code></pre><p>接著輸入</p>
-<pre><code>hexo d -g
-</code></pre><p>成功的話，就會看到</p>
-<pre><code>INFO  Deploy done: git
-</code></pre><p>並可以在 <code>https://yoyoboy.github.io</code> 瀏覽你的 Blog。</p>
-<h4 id="佈署失敗的錯誤訊息"><a href="#佈署失敗的錯誤訊息" class="headerlink" title="佈署失敗的錯誤訊息"></a><strong>佈署失敗的錯誤訊息</strong></h4><ul>
-<li><p>沒設定 git 使用者</p>
-<pre><code>Please tell me who you are.
-</code></pre><p>  用下面的指令設定一下。</p>
-<pre><code>git config --global user.email &quot;you@example.com&quot;
-git config --global user.name &quot;Your Name&quot;
-</code></pre></li>
-</ul>
-<ul>
-<li><p>沒安裝 <code>hexo-deployer-git</code></p>
-<pre><code>ERROR Deployer not found: git
-</code></pre><p> 可以在 Blog 目錄下輸入</p>
-<pre><code>npm install
-</code></pre><p> 或者</p>
-<pre><code>npm install hexo-deployer-git --save
-</code></pre><p> 進行安裝</p>
-</li>
-</ul>
-<h2 id="小技巧"><a href="#小技巧" class="headerlink" title="小技巧"></a><strong>小技巧</strong></h2><ul>
-<li><p><code>hexo clean</code></p>
-<p>  這個指令可以清除 Hexo 所 generate 的東西。在某些主題裡會有 tag 的列表，假設之前不小心在文章寫錯了 tag，已經被加入列表中又不知道怎麼刪掉，可以靠這個指令達成。 </p>
-</li>
-</ul>
-<h2 id="結論"><a href="#結論" class="headerlink" title="結論"></a><strong>結論</strong></h2><p>其實在 <code>hexo init</code> 之後，自動產生的那篇 <code>Hello World</code> 文章裡面就都有教了 XDD</p>
+<h2 id="佈署到-Github"><a href="#佈署到-Github" class="headerlink" title="佈署到 Github"></a><strong>佈署到 Github</strong></h2><h2 id="結論"><a href="#結論" class="headerlink" title="結論"></a><strong>結論</strong></h2><p>其實在 <code>hexo init</code> 之後，自動產生的那篇 <code>Hello World</code> 文章裡面就都有教了 XDD</p>
 <h2 id="Reference"><a href="#Reference" class="headerlink" title="Reference"></a><strong>Reference</strong></h2><p><a href="https://oawan.me/2016/easy-hexo-easy-blog/" target="_blank" rel="external">[Hexo] 快速上手 Hexo 網誌框架</a></p>
 <p><a href="http://natlee.github.io/Blog/2015/08/11/Install_Hexo_in_Windows/" target="_blank" rel="external">Hexo在Windows上的安裝心得</a></p>
-<p><a href="https://github.com/hexojs/hexo/issues/1013" target="_blank" rel="external">升级到hexo 3.0后deploy type: github选项无效 #1013</a></p>
+<p><a href="http://www.howtogeek.com/howto/16226/complete-guide-to-symbolic-links-symlinks-on-windows-or-linux/" target="_blank" rel="external">Complete Guide to Symbolic Links (symlinks) on Windows or Linux</a></p>
 
       
     </div>
@@ -185,7 +152,7 @@ git config --global user.name &quot;Your Name&quot;
 
 
 <section id="comment">
-  <h1 class="title">Kommentare</h1>
+  <h1 class="title">Comments</h1>
 
   
       <div id="fb-root"></div>
@@ -199,7 +166,7 @@ git config --global user.name &quot;Your Name&quot;
   }(document, 'script', 'facebook-jssdk'));
 </script>
 
-<div class="fb-comments" data-href="https://aiueoh.github.io/2016/08/01/在-windows-架設-hexo-寫作環境筆記/index.html" data-num-posts="5" data-width="840" data-colorscheme="light"></div>
+<div class="fb-comments" data-href="https://aiueoh.github.io/2016/08/01/hexo_enviroment_in_windows_10/index.html" data-num-posts="5" data-width="840" data-colorscheme="light"></div>
       
   
 </section>
@@ -208,7 +175,7 @@ git config --global user.name &quot;Your Name&quot;
     <aside id="sidebar" class="alignright">
   <div class="search">
   <form action="//google.com/search" method="get" accept-charset="utf-8">
-    <input type="search" name="q" results="0" placeholder="Suche">
+    <input type="search" name="q" results="0" placeholder="Search">
     <input type="hidden" name="q" value="site:aiueoh.github.io">
   </form>
 </div>
@@ -231,8 +198,6 @@ git config --global user.name &quot;Your Name&quot;
     <li><a href="/tags/intellij/">intellij</a><small>0</small></li>
   
     <li><a href="/tags/java/">java</a><small>0</small></li>
-  
-    <li><a href="/tags/markdow/">markdow</a><small>0</small></li>
   
     <li><a href="/tags/markdown/">markdown</a><small>1</small></li>
   
