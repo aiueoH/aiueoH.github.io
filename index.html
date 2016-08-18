@@ -50,6 +50,50 @@
     <header>
       
         <div class="icon"></div>
+        <time datetime="2016-08-18T09:00:22.000Z"><a href="/2016/08/18/get-enabled-listener-app-in-android/">2016-08-18</a></time>
+      
+      
+  
+    <h1 class="title"><a href="/2016/08/18/get-enabled-listener-app-in-android/">在 Android 中取得開啟&quot;通知存取權&quot;的 App</a></h1>
+  
+
+    </header>
+    <div class="entry">
+      
+        <p>要讓你的程式可以讀取通知(Notification)，必須在手機中開啟通知存取權，像是一般的通知記錄軟體都需要開啟這東西。</p>
+<p><img src="img/get-enabled-listener-app-in-android/1.png" alt=""></p>
+<p>透過以下的程式碼可以取得目前已授予通知存取權的 App，拿到的是 package name。</p>
+<pre><code>Set&lt;String&gt; enabledListenerPackages = NotificationManagerCompat.getEnabledListenerPackages(context);
+</code></pre><p>假設你的程式需要知道目前自己有沒有被授予通知存取權可以這樣做。</p>
+<pre><code>boolean isEnabledListener(Context context) {
+    String myPackageName = context.getPackageName();
+    Set&lt;String&gt; enabledListenerPackages = NotificationManagerCompat.getEnabledListenerPackages(context);
+    return enabledListenerPackages.contains(myPackageName);
+}
+</code></pre><h2 id="Reference"><a href="#Reference" class="headerlink" title="Reference"></a><strong>Reference</strong></h2><p><a href="https://developer.android.com/reference/android/support/v4/app/NotificationManagerCompat.html#getEnabledListenerPackages(android.content.Context" target="_blank" rel="external">NotificationManagerCompat</a>)</p>
+<p><a href="http://stackoverflow.com/questions/18097583/check-for-access-to-notifications-using-notificationlistenerservice/21392852#21392852" target="_blank" rel="external">Check for access to notifications using NotificationListenerService</a></p>
+
+      
+    </div>
+    <footer>
+      
+        
+        
+      
+      <div class="clearfix"></div>
+    </footer>
+  </div>
+</article>
+
+
+
+
+  <article class="post">
+  
+  <div class="post-content">
+    <header>
+      
+        <div class="icon"></div>
         <time datetime="2016-08-01T03:00:22.000Z"><a href="/2016/08/01/hexo-enviroment-in-windows/">2016-08-01</a></time>
       
       
@@ -183,7 +227,7 @@ npm install hexo --save
   <h3 class="title">Tags</h3>
   <ul class="entry">
   
-    <li><a href="/tags/android/">android</a><small>1</small></li>
+    <li><a href="/tags/android/">android</a><small>2</small></li>
   
     <li><a href="/tags/eye/">eye</a><small>0</small></li>
   
@@ -196,6 +240,8 @@ npm install hexo --save
     <li><a href="/tags/java/">java</a><small>0</small></li>
   
     <li><a href="/tags/markdown/">markdown</a><small>1</small></li>
+  
+    <li><a href="/tags/notification/">notification</a><small>1</small></li>
   
     <li><a href="/tags/plist/">plist</a><small>0</small></li>
   

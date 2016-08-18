@@ -3,15 +3,18 @@
 <head>
   <meta charset="utf-8">
   
-  <title>移除 Android 沒用到的資源 | 韋恩居士</title>
+  <title>在 Android 中取得開啟&quot;通知存取權&quot;的 App | 韋恩居士</title>
   <meta name="author" content="Wayne">
   
-  <meta name="description" content="前言身為一個習慣差的工程師，在專案做久了之後總是會產生一堆垃圾，用不到的 class、variable、function……等等，這些在 refactor 的時候還滿容易就順手清掉，但 Android 的 resource 就不同了，不知道為什麼一段時間過去總是會留下許多灰色名稱的 resource">
+  <meta name="description" content="要讓你的程式可以讀取通知(Notification)，必須在手機中開啟通知存取權，像是一般的通知記錄軟體都需要開啟這東西。
+
+透過以下的程式碼可以取得目前已授予通知存取權的 App，拿到的是 package name。
+Set&amp;lt;String&amp;gt; enabledListenerPackage">
   
   
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 
-  <meta property="og:title" content="移除 Android 沒用到的資源"/>
+  <meta property="og:title" content="在 Android 中取得開啟&quot;通知存取權&quot;的 App"/>
   <meta property="og:site_name" content="韋恩居士"/>
 
   
@@ -51,23 +54,28 @@
     <header>
       
         <div class="icon"></div>
-        <time datetime="2016-07-01T02:12:44.000Z"><a href="/2016/07/01/remove-android-unused-resources/">2016-07-01</a></time>
+        <time datetime="2016-08-18T09:00:22.000Z"><a href="/2016/08/18/get-enabled-listener-app-in-android/">2016-08-18</a></time>
       
       
   
-    <h1 class="title">移除 Android 沒用到的資源</h1>
+    <h1 class="title">在 Android 中取得開啟&quot;通知存取權&quot;的 App</h1>
   
 
     </header>
     <div class="entry">
       
-        <h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a><strong>前言</strong></h2><p>身為一個習慣差的工程師，在專案做久了之後總是會產生一堆垃圾，用不到的 class、variable、function……等等，這些在 refactor 的時候還滿容易就順手清掉，但 Android 的 resource 就不同了，不知道為什麼一段時間過去總是會留下許多灰色名稱的 resource，string、dimen 還不打緊，如果是圖片的話就不太好了，apk 可是愈瘦愈好。(不過也是有人在下載 app 的時候看到檔案愈大會愈覺得有份量、愈好)</p>
-<h2 id="方法"><a href="#方法" class="headerlink" title="方法"></a><strong>方法</strong></h2><p>最快的方法應該是 <code>ctrl + alt + shift + i</code> 然後輸入 <code>unused resource</code> 然後就跑出來了。</p>
-<p><img src="/img/remove-android-unused-resources/1.png" alt=""></p>
-<p>可以選擇要搜尋的範圍。</p>
-<p><img src="/img/remove-android-unused-resources/2.png" alt=""></p>
-<p>搜尋完成後會跳出這個視窗，接著就可以進行移除啦！</p>
-<p><img src="/img/remove-android-unused-resources/3.png" alt=""></p>
+        <p>要讓你的程式可以讀取通知(Notification)，必須在手機中開啟通知存取權，像是一般的通知記錄軟體都需要開啟這東西。</p>
+<p><img src="img/get-enabled-listener-app-in-android/1.png" alt=""></p>
+<p>透過以下的程式碼可以取得目前已授予通知存取權的 App，拿到的是 package name。</p>
+<pre><code>Set&lt;String&gt; enabledListenerPackages = NotificationManagerCompat.getEnabledListenerPackages(context);
+</code></pre><p>假設你的程式需要知道目前自己有沒有被授予通知存取權可以這樣做。</p>
+<pre><code>boolean isEnabledListener(Context context) {
+    String myPackageName = context.getPackageName();
+    Set&lt;String&gt; enabledListenerPackages = NotificationManagerCompat.getEnabledListenerPackages(context);
+    return enabledListenerPackages.contains(myPackageName);
+}
+</code></pre><h2 id="Reference"><a href="#Reference" class="headerlink" title="Reference"></a><strong>Reference</strong></h2><p><a href="https://developer.android.com/reference/android/support/v4/app/NotificationManagerCompat.html#getEnabledListenerPackages(android.content.Context" target="_blank" rel="external">NotificationManagerCompat</a>)</p>
+<p><a href="http://stackoverflow.com/questions/18097583/check-for-access-to-notifications-using-notificationlistenerservice/21392852#21392852" target="_blank" rel="external">Check for access to notifications using NotificationListenerService</a></p>
 
       
     </div>
@@ -77,7 +85,7 @@
         
   
   <div class="tags">
-    <a href="/tags/android/">android</a>
+    <a href="/tags/android/">android</a>, <a href="/tags/notification/">notification</a>
   </div>
 
         
@@ -120,7 +128,7 @@
   }(document, 'script', 'facebook-jssdk'));
 </script>
 
-<div class="fb-comments" data-href="https://aiueoh.github.io/2016/07/01/remove-android-unused-resources/index.html" data-num-posts="5" data-width="840" data-colorscheme="light"></div>
+<div class="fb-comments" data-href="https://aiueoh.github.io/2016/08/18/get-enabled-listener-app-in-android/index.html" data-num-posts="5" data-width="840" data-colorscheme="light"></div>
       
   
 </section>
