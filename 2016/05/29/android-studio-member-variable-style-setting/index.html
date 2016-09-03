@@ -3,18 +3,16 @@
 <head>
   <meta charset="utf-8">
   
-  <title>在 Android 中取得開啟&quot;通知存取權&quot;的 App | 韋恩居士</title>
+  <title>在 Android Studio(Intellij) 設定成員變數風格 | 韋恩居士</title>
   <meta name="author" content="Wayne">
   
-  <meta name="description" content="要讓你的程式可以讀取通知(Notification)，必須在手機中開啟通知存取權，像是一般的通知記錄軟體都需要開啟這東西。
-
-透過以下的程式碼可以取得目前已授予通知存取權的 App，拿到的是 package name。
-Set&amp;lt;String&amp;gt; enabledListenerPackage">
+  <meta name="description" content="在 Android 開發中，不少開發者都會採用將 member variable 以 m 開頭，但在 Android Studio 中預設是沒有任何開頭字的。
+設定的路徑為 File &amp;gt; Settings &amp;gt; Editor &amp;gt; Code Style &amp;gt; Java 接著在右邊的">
   
   
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 
-  <meta property="og:title" content="在 Android 中取得開啟&quot;通知存取權&quot;的 App"/>
+  <meta property="og:title" content="在 Android Studio(Intellij) 設定成員變數風格"/>
   <meta property="og:site_name" content="韋恩居士"/>
 
   
@@ -54,28 +52,26 @@ Set&amp;lt;String&amp;gt; enabledListenerPackage">
     <header>
       
         <div class="icon"></div>
-        <time datetime="2016-08-18T09:00:22.000Z"><a href="/2016/08/18/get-enabled-listener-app-in-android/">2016-08-18</a></time>
+        <time datetime="2016-05-29T07:58:28.000Z"><a href="/2016/05/29/android-studio-member-variable-style-setting/">2016-05-29</a></time>
       
       
   
-    <h1 class="title">在 Android 中取得開啟&quot;通知存取權&quot;的 App</h1>
+    <h1 class="title">在 Android Studio(Intellij) 設定成員變數風格</h1>
   
 
     </header>
     <div class="entry">
       
-        <p>要讓你的程式可以讀取通知(Notification)，必須在手機中開啟通知存取權，像是一般的通知記錄軟體都需要開啟這東西。</p>
-<p><img src="img/get-enabled-listener-app-in-android/1.png" alt=""></p>
-<p>透過以下的程式碼可以取得目前已授予通知存取權的 App，拿到的是 package name。</p>
-<pre><code>Set&lt;String&gt; enabledListenerPackages = NotificationManagerCompat.getEnabledListenerPackages(context);
-</code></pre><p>假設你的程式需要知道目前自己有沒有被授予通知存取權可以這樣做。</p>
-<pre><code>boolean isEnabledListener(Context context) {
-    String myPackageName = context.getPackageName();
-    Set&lt;String&gt; enabledListenerPackages = NotificationManagerCompat.getEnabledListenerPackages(context);
-    return enabledListenerPackages.contains(myPackageName);
-}
-</code></pre><h2 id="Reference"><a href="#Reference" class="headerlink" title="Reference"></a><strong>Reference</strong></h2><p><a href="https://developer.android.com/reference/android/support/v4/app/NotificationManagerCompat.html#getEnabledListenerPackages(android.content.Context" target="_blank" rel="external">NotificationManagerCompat</a>)</p>
-<p><a href="http://stackoverflow.com/questions/18097583/check-for-access-to-notifications-using-notificationlistenerservice/21392852#21392852" target="_blank" rel="external">Check for access to notifications using NotificationListenerService</a></p>
+        <p>在 Android 開發中，不少開發者都會採用將 member variable 以 m 開頭，但在 Android Studio 中預設是沒有任何開頭字的。</p>
+<p>設定的路徑為 File &gt; Settings &gt; Editor &gt; Code Style &gt; Java 接著在右邊的 tab 選擇 Code Generation，如下圖所示，可以在此設定 Name prefix，而 Field 這欄就是 class 內的 member variable。</p>
+<p><img src="/img/android-studio-member-variable-style-setting/1.png" alt=""></p>
+<h2 id="好處"><a href="#好處" class="headerlink" title="好處"></a><strong>好處</strong></h2><p>話說有沒有預設有什麼差別嗎？自己打 m 不就好了？</p>
+<p>假設今天是沒有設定的狀況下，變數開頭加了 m，接著使用 Android Studio 的 Generate 生成 constructor、getter、setter，其產生的方法名稱還有參數都會多一個 m。</p>
+<p><img src="/img/android-studio-member-variable-style-setting/2.png" alt=""><br><img src="/img/android-studio-member-variable-style-setting/3.png" alt=""></p>
+<p>但若是設定了 Name prefix，就可以正常的自動生了。</p>
+<p><img src="/img/android-studio-member-variable-style-setting/4.png" alt=""></p>
+<p>其實從以前我就很想要用這種開頭加上 m 的 code style，無奈遇到上述的問題，寫起來一直很煩，所以總是又回歸到沒有 m 的變數名稱，現在找到這個方法就可以跟大家一樣使用 m 開頭的變數名稱了！</p>
+<h2 id="Reference"><a href="#Reference" class="headerlink" title="Reference"></a><strong>Reference</strong></h2><p><a href="http://stackoverflow.com/questions/22732722/intellij-android-studio-member-variable-prefix" target="_blank" rel="external">Intellij (Android studio) member variable prefix</a></p>
 
       
     </div>
@@ -85,7 +81,7 @@ Set&amp;lt;String&amp;gt; enabledListenerPackage">
         
   
   <div class="tags">
-    <a href="/tags/android/">android</a>, <a href="/tags/notification/">notification</a>
+    <a href="/tags/android/">android</a>, <a href="/tags/intellij/">intellij</a>
   </div>
 
         
@@ -128,7 +124,7 @@ Set&amp;lt;String&amp;gt; enabledListenerPackage">
   }(document, 'script', 'facebook-jssdk'));
 </script>
 
-<div class="fb-comments" data-href="https://aiueoh.github.io/2016/08/18/get-enabled-listener-app-in-android/index.html" data-num-posts="5" data-width="840" data-colorscheme="light"></div>
+<div class="fb-comments" data-href="https://aiueoh.github.io/2016/05/29/android-studio-member-variable-style-setting/index.html" data-num-posts="5" data-width="840" data-colorscheme="light"></div>
       
   
 </section>
