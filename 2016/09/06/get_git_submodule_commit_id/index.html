@@ -3,13 +3,26 @@
 <head>
   <meta charset="utf-8">
   
-  <title>notification | 韋恩居士</title>
+  <title>在 Gt 查看指定版本的 submodule 版本號 | 韋恩居士</title>
   <meta name="author" content="Wayne">
+  
+  <meta name="description" content="列出該版本所有的內容
+git ls-tree COMMIT
+
+列出該版本指定的內容
+git ls-tree COMMIT OBJECT
+
+
+範例取得 023d4 版本的 mylib 版本號 
+
+git ls-tree 023d4 mylib
+你將會看到
+16000 commit 6fd2bd7f35">
   
   
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 
-  
+  <meta property="og:title" content="在 Gt 查看指定版本的 submodule 版本號"/>
   <meta property="og:site_name" content="韋恩居士"/>
 
   
@@ -43,25 +56,93 @@
 <div class="clearfix"></div>
 </header>
   <div id="content" class="inner">
-    <div id="main-col" class="alignleft"><div id="wrapper">
-<h2 class="archive-title tag">notification</h2>
+    <div id="main-col" class="alignleft"><div id="wrapper"><article class="post">
+  
+  <div class="post-content">
+    <header>
+      
+        <div class="icon"></div>
+        <time datetime="2016-09-06T10:15:28.000Z"><a href="/2016/09/06/get_git_submodule_commit_id/">2016-09-06</a></time>
+      
+      
+  
+    <h1 class="title">在 Gt 查看指定版本的 submodule 版本號</h1>
+  
 
+    </header>
+    <div class="entry">
+      
+        <ul>
+<li><p>列出該版本所有的內容</p>
+<pre><code>git ls-tree COMMIT
+</code></pre></li>
+<li><p>列出該版本指定的內容</p>
+<pre><code>git ls-tree COMMIT OBJECT
+</code></pre></li>
+</ul>
+<h2 id="範例"><a href="#範例" class="headerlink" title="範例"></a><strong>範例</strong></h2><pre><code>取得 023d4 版本的 mylib 版本號 
 
-  <div class="archive">
-    
-      <article class="post">
-        <div class="post-content">
-          <header>
-            <div class="icon"></div>
-            <time datetime="2016-08-18T09:00:22.000Z"><a href="/2016/08/18/get-enabled-listener-app-in-android/">2016-08-18</a></time>
-            
-              <h1 class="title"><a href="/2016/08/18/get-enabled-listener-app-in-android/">在 Android 中取得開啟&quot;通知存取權&quot;的 App</a></h1>
-            
-          </header>
-        </div>
-      </article>
-    
+git ls-tree 023d4 mylib
+</code></pre><p>你將會看到</p>
+<pre><code>16000 commit 6fd2bd7f351104ec96fcbcdf540dc765b26fc43e mylib
+</code></pre><h2 id="Reference"><a href="#Reference" class="headerlink" title="Reference"></a><strong>Reference</strong></h2><p><a href="http://stackoverflow.com/questions/3983829/how-can-i-get-a-git-submodules-associated-commit-id-from-a-past-commit-in-the-p" target="_blank" rel="external">How can I get a git submodule’s associated commit ID from a past commit in the parent clone?</a></p>
+
+      
+    </div>
+    <footer>
+      
+        
+        
+  
+  <div class="tags">
+    <a href="/tags/git/">git</a>, <a href="/tags/submodule/">submodule</a>
   </div>
+
+        
+  <div class="addthis addthis_toolbox addthis_default_style">
+    
+      <a class="addthis_button_facebook_like" fb:like:layout="button_count"></a>
+    
+    
+      <a class="addthis_button_tweet"></a>
+    
+    
+      <a class="addthis_button_google_plusone" g:plusone:size="medium"></a>
+    
+    
+      <a class="addthis_button_pinterest_pinit" pi:pinit:layout="horizontal"></a>
+    
+    <a class="addthis_counter addthis_pill_style"></a>
+  </div>
+  <script type="text/javascript" src="//s7.addthis.com/js/300/addthis_widget.js"></script>
+
+      
+      <div class="clearfix"></div>
+    </footer>
+  </div>
+</article>
+
+
+<section id="comment">
+  <h1 class="title">Kommentare</h1>
+
+  
+      <div id="fb-root"></div>
+<script>
+  (function(d, s, id) {
+    var js, fjs = d.getElementsByTagName(s)[0];
+    if (d.getElementById(id)) return;
+    js = d.createElement(s); js.id = id;
+    js.src = "//connect.facebook.net/en_US/all.js#xfbml=1&appId=123456789012345";
+    fjs.parentNode.insertBefore(js, fjs);
+  }(document, 'script', 'facebook-jssdk'));
+</script>
+
+<div class="fb-comments" data-href="https://aiueoh.github.io/2016/09/06/get_git_submodule_commit_id/index.html" data-num-posts="5" data-width="840" data-colorscheme="light"></div>
+      
+  
+</section>
+
 </div></div>
     <aside id="sidebar" class="alignright">
   <div class="search">
