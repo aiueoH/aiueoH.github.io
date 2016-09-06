@@ -50,6 +50,55 @@
     <header>
       
         <div class="icon"></div>
+        <time datetime="2016-09-06T07:20:23.000Z"><a href="/2016/09/06/android_facebook_fragment_problem/">2016-09-06</a></time>
+      
+      
+  
+    <h1 class="title"><a href="/2016/09/06/android_facebook_fragment_problem/">在 Android Fragment 中使用 Facebook 登入遇到的問題</a></h1>
+  
+
+    </header>
+    <div class="entry">
+      
+        <p>最近要在 App 中加入 FB 登入的功能，為了讓這個登入的頁面能夠更能 reuse，我把他做成 Fragment，於是就踩到了坑。</p>
+<p>在 Android 中要使用 FB 登入蠻簡單的，大概這幾個步驟就可以了：</p>
+<ol>
+<li>Initialize sdk</li>
+<li>Create CallbackManager</li>
+<li>Call CallbackManager.onActivityResult</li>
+<li>Register login callback</li>
+<li>Login</li>
+</ol>
+<p>這次遇到的問題就是第三點 <code>CallbackManager.onActivityResult</code>。在 App 中登入 FB 後，我註冊的 Callback 始終沒有被呼叫，不管是 onSuccess、onCancel、onError 都是，用 debug 模式看確實有跑到<code>CallbackManager.onActivityResult</code> 這段。</p>
+<p>在找了許久找不出原因後，決定在 debug 時按下 F7 進入 <code>CallbackManager.onActivityResult</code> 一探究竟，在裡面找到了我所註冊的 Callback 但取出來卻是 null，又是一陣問號。</p>
+<p>在多次檢查後，發現 <code>CallbackManager.onActivityResult</code> 裡的 Request code 跟 Facebook 預設的(64206)不一樣，這就是問題的所在。</p>
+<h2 id="原因"><a href="#原因" class="headerlink" title="原因"></a><strong>原因</strong></h2><p>Fb 的 Login 是在 Fragment 中呼叫，而擁有這個 Fragment 的 Activity 是自己在 override 的 onActivityResult 呼叫 Fragment 的 onActivity，因此造成 Request code 錯誤。</p>
+<p>據 <a href="https://www.facebook.com/261129290627717/photos/pb.261129290627717.-2207520000.1460987105./582597351814241/?type=3&amp;size=277%2C182&amp;fbid=582597351814241" target="_blank" rel="external">Android Taiwan Developer</a> 所記載，在 Fragment 中呼叫另一個 Activity 時 Request code 會被加上 65536，並在之後 onActivityResult 時減回，用以區分不同 Fragment 層級的 Request code。</p>
+<p>擁有 Fragment 的 Acitivty 本身就會自己去呼叫其所擁有的 Fragment 的 onActivityResult，所以正確的方法就是不用額外在 Activity 中呼叫 Fragment 的 onActivityReuslt，若 override 了也只要 super.onActivityResult 即可。</p>
+<h2 id="Reference"><a href="#Reference" class="headerlink" title="Reference"></a><strong>Reference</strong></h2><p><a href="https://www.facebook.com/261129290627717/photos/pb.261129290627717.-2207520000.1460987105./582597351814241/?type=3&amp;size=277%2C182&amp;fbid=582597351814241" target="_blank" rel="external">Android Taiwan Developer</a></p>
+<p><a href="http://stackoverflow.com/questions/32805925/where-is-the-request-code-constant-64206-for-login-defined-in-facebook-sdk" target="_blank" rel="external">Where is the request code constant (64206) for login defined in Facebook SDK</a></p>
+
+      
+    </div>
+    <footer>
+      
+        
+        
+      
+      <div class="clearfix"></div>
+    </footer>
+  </div>
+</article>
+
+
+
+
+  <article class="post">
+  
+  <div class="post-content">
+    <header>
+      
+        <div class="icon"></div>
         <time datetime="2016-08-18T09:00:22.000Z"><a href="/2016/08/18/get-enabled-listener-app-in-android/">2016-08-18</a></time>
       
       
@@ -257,7 +306,7 @@ npm install hexo --save
     <aside id="sidebar" class="alignright">
   <div class="search">
   <form action="//google.com/search" method="get" accept-charset="utf-8">
-    <input type="search" name="q" results="0" placeholder="Suche">
+    <input type="search" name="q" results="0" placeholder="Search">
     <input type="hidden" name="q" value="site:aiueoh.github.io">
   </form>
 </div>
@@ -271,7 +320,11 @@ npm install hexo --save
   
     <li><a href="/tags/android/">android</a><small>3</small></li>
   
+    <li><a href="/tags/android-fragment-facebook/">android, fragment, facebook</a><small>1</small></li>
+  
     <li><a href="/tags/eye/">eye</a><small>0</small></li>
+  
+    <li><a href="/tags/facebook/">facebook</a><small>0</small></li>
   
     <li><a href="/tags/hexo/">hexo</a><small>1</small></li>
   
@@ -280,6 +333,8 @@ npm install hexo --save
     <li><a href="/tags/intellij/">intellij</a><small>1</small></li>
   
     <li><a href="/tags/java/">java</a><small>0</small></li>
+  
+    <li><a href="/tags/login/">login</a><small>0</small></li>
   
     <li><a href="/tags/markdown/">markdown</a><small>1</small></li>
   
