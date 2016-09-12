@@ -145,6 +145,106 @@ git ls-tree 023d4 mylib
     <header>
       
         <div class="icon"></div>
+        <time datetime="2016-08-22T08:22:35.000Z"><a href="/2016/08/22/android-facebook-login/">2016-08-22</a></time>
+      
+      
+  
+    <h1 class="title"><a href="/2016/08/22/android-facebook-login/">在 Android 中使用 Facebook 登入功能</a></h1>
+  
+
+    </header>
+    <div class="entry">
+      
+        <p>本文重點在於 Key Hash 的取得方式，其他流程僅簡單敘述無實際 code。</p>
+<h2 id="建立-Facebook-App"><a href="#建立-Facebook-App" class="headerlink" title="建立 Facebook App"></a><strong>建立 Facebook App</strong></h2><p>進入 <a href="https://developers.facebook.com/quickstarts/?platform=android" target="_blank" rel="external">facebook for developers Quick Start for Android</a></p>
+<p><img src="img/android-facebook-login/1.png" alt=""></p>
+<p>輸入所要新增的 ID 建立 App，若是 ID 中有包含 facebook、fb 等關鍵字會無法建立。這個 ID 跟 Android 的 Package name 是沒關係的，沒有要求要一樣。</p>
+<p><img src="img/android-facebook-login/2.png" alt=""></p>
+<p>填一下 Email 以及 App 類別，送出後就會開始一步一步教你如何使用，總共有 </p>
+<ol>
+<li>Facebook SDK 引用</li>
+<li>在 Android 專案中加入你的 Facebook App ID</li>
+<li>登記 Package Name 和 Default Activity Name</li>
+<li>登記 key hashes</li>
+</ol>
+<p>基本上 1 ~ 3 應該還蠻簡單的，有可能會有問題的是第四個步驟。</p>
+<h2 id="取得-Key-Hash"><a href="#取得-Key-Hash" class="headerlink" title="取得 Key Hash"></a><strong>取得 Key Hash</strong></h2><p><img src="img/android-facebook-login/3.png" alt=""></p>
+<p>照著官方的步驟在命令提示字元輸入</p>
+<pre><code>keytool -exportcert -alias androiddebugkey -keystore %HOMEPATH%\.android\debug.keystore | openssl sha1 -binary | openssl base64
+</code></pre><p>有可能會出現找不到 keytool 或是 openssl 的狀況。</p>
+<ul>
+<li><p>keytool</p>
+<p>  這支程式有裝 Java 的話應該就會有，會找不到大概是因為沒有設定到 path 裡面，他的位置是在 <code>C:\Program Files\Java\jre1.8.0_101\bin</code>。</p>
+</li>
+<li><p>openssl</p>
+<p>  這個就比較有可能是沒有安裝到了，可以到<a href="https://code.google.com/archive/p/openssl-for-windows/downloads" target="_blank" rel="external">這個連結</a>下載 openssl for windows，免安裝的，我直接把它解壓丟到 C 目錄下。</p>
+</li>
+</ul>
+<p>兩樣東西都確認有了之後就可以執行下面的指令，cd 到 <code>java/bin</code> 底下接著使用 keytool。目錄位置若有不同記得修改一下。</p>
+<pre><code>cd C:\Program Files\Java\jre1.8.0_101\bin
+keytool -exportcert -alias androiddebugkey -keystore %HOMEPATH%\.android\debug.keystore | C:\openssl-0.9.8k_X64\bin\openssl sha1 -binary | C:\openssl-0.9.8k_X64\bin\openssl base64
+</code></pre><p>接著會要你輸入 keystore 的密碼，按官方的說法預設是 </p>
+<pre><code>android
+</code></pre><p>接著就會取得一組長度 28 的 key hash，再把這組字串貼上去送出即可。</p>
+<p>但也不要開心的太早，我就是做到後面才發現這個 key hash 似乎有問題。</p>
+<p>先來繼續完成 Facebook 的登入按鈕。</p>
+<h2 id="在-Android-中加入-Facebook-login-按鈕"><a href="#在-Android-中加入-Facebook-login-按鈕" class="headerlink" title="在 Android 中加入 Facebook login 按鈕"></a><strong>在 Android 中加入 Facebook login 按鈕</strong></h2><p>在送出 key hash 之後會繼續引導你</p>
+<p><img src="img/android-facebook-login/4.png" alt=""></p>
+<p>點選那個 Login 的圖按就會進到<a href="https://developers.facebook.com/docs/facebook-login/android/" target="_blank" rel="external">登入的教學頁面</a>，也是一樣照著步驟做即可。</p>
+<ol>
+<li>在 <code>AndroidManifest.xml</code> 中加入 <code>FacebookActivity</code>。</li>
+<li>在 Layout 中放入 Facebook login button</li>
+<li>在 Activity 中 Init Facebook SDK</li>
+<li>在 Activity 中建立 CallbackMagager，以及在 onActivityResult 中呼叫 CallbackMager.onActivityResult</li>
+<li>替 login button 註冊 callback</li>
+</ol>
+<p>也是挺簡單的，就不再多說明了。</p>
+<h2 id="無法正常登入登出，原來是-Key-Hash-的問題"><a href="#無法正常登入登出，原來是-Key-Hash-的問題" class="headerlink" title="無法正常登入登出，原來是 Key Hash 的問題"></a><strong>無法正常登入登出，原來是 Key Hash 的問題</strong></h2><p>我的情況是做好之後可以正常登入，在登入後那個登入的按鈕會變成登出的按鈕，於是我就手賤按了登出，要再登入就發現不能登入了，出現這樣的訊息：</p>
+<pre><code>There is an error in logging you into this application. Please try again later.
+</code></pre><p>如果手機用中文版的話是</p>
+<pre><code>登入錯誤: 登入到應用程式時發生錯誤，請稍後再試。
+</code></pre><p>網上有人說要使用者自己去 Facebook 裡面移除這個登入的 App，就可以再登入了，但若是再次登出並登入又會出現一樣的問題。</p>
+<p>後來在 Faceook Login 的 <a href="https://developers.facebook.com/docs/facebook-login/android/advanced" target="_blank" rel="external">Android Troubleshooting</a> 頁找到一段可以在 Android app runtime 時印出 key hash 的 code，差不多是長這樣：</p>
+<pre><code>String packageName = &quot;com.example.fblogin&quot;;
+try {
+    PackageInfo info = getPackageManager().getPackageInfo(packageName, PackageManager.GET_SIGNATURES);
+    for (Signature signature : info.signatures) {
+        try {
+            MessageDigest md = MessageDigest.getInstance(&quot;SHA&quot;);
+            md.update(signature.toByteArray());
+            String s = Base64.encodeToString(md.digest(), Base64.DEFAULT);  
+            Log.d(&quot;key hash&quot;, s);
+        } catch (NoSuchAlgorithmException e) {
+            e.printStackTrace();
+        }
+    }
+} catch (PackageManager.NameNotFoundException e) {
+    e.printStackTrace();
+}
+</code></pre><p>執行下去就會跑出這支　App 的　key hash，貼到剛剛　Facebook App 裡的　Key Hashes 欄位送出，就可以正常的登入啦！</p>
+<h2 id="Reference"><a href="#Reference" class="headerlink" title="Reference"></a><strong>Reference</strong></h2><p><a href="http://stackoverflow.com/questions/5488339/how-can-i-find-and-run-the-keytool" target="_blank" rel="external">How can I find and run the keytool</a></p>
+
+      
+    </div>
+    <footer>
+      
+        
+        
+      
+      <div class="clearfix"></div>
+    </footer>
+  </div>
+</article>
+
+
+
+
+  <article class="post">
+  
+  <div class="post-content">
+    <header>
+      
+        <div class="icon"></div>
         <time datetime="2016-08-18T09:00:22.000Z"><a href="/2016/08/18/get-enabled-listener-app-in-android/">2016-08-18</a></time>
       
       
@@ -352,7 +452,7 @@ npm install hexo --save
     <aside id="sidebar" class="alignright">
   <div class="search">
   <form action="//google.com/search" method="get" accept-charset="utf-8">
-    <input type="search" name="q" results="0" placeholder="Buscar">
+    <input type="search" name="q" results="0" placeholder="Search">
     <input type="hidden" name="q" value="site:aiueoh.github.io">
   </form>
 </div>
@@ -361,14 +461,14 @@ npm install hexo --save
 
   
 <div class="widget tag">
-  <h3 class="title">Etiquetas</h3>
+  <h3 class="title">Tags</h3>
   <ul class="entry">
   
-    <li><a href="/tags/android/">android</a><small>4</small></li>
+    <li><a href="/tags/android/">android</a><small>5</small></li>
   
     <li><a href="/tags/eye/">eye</a><small>0</small></li>
   
-    <li><a href="/tags/facebook/">facebook</a><small>1</small></li>
+    <li><a href="/tags/facebook/">facebook</a><small>2</small></li>
   
     <li><a href="/tags/fragment/">fragment</a><small>1</small></li>
   
@@ -382,7 +482,7 @@ npm install hexo --save
   
     <li><a href="/tags/java/">java</a><small>0</small></li>
   
-    <li><a href="/tags/login/">login</a><small>0</small></li>
+    <li><a href="/tags/login/">login</a><small>1</small></li>
   
     <li><a href="/tags/markdown/">markdown</a><small>1</small></li>
   
